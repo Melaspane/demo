@@ -53,14 +53,18 @@ const backendURL = _window.__ENV && _window.__ENV.backendURL;
 const axiosClient = axios.create({ baseURL: `${backendURL}`, timeout: 20000, withCredentials: true});
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 
-
-export default function Shop() {
+  export default function Shop() {
   const [user, setUser] = useState<any>(null);
   const [accessToken, setAccessToken] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string>("");
-  const [user, setUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (window.Pi) {
+      window.Pi.init({ version: "2.0", sandbox: true });
+    }
+  }, []);
   const signIn = async () => {
     const scopes = ['username', 'payments', 'roles', 'in_app_notifications'];
     const authResult: AuthResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
