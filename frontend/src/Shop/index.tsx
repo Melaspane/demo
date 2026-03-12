@@ -55,6 +55,9 @@ const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Al
 
 
 export default function Shop() {
+  const [user, setUser] = useState<any>(null);
+  const [accessToken, setAccessToken] = useState<string>("");
+  const [paymentStatus, setPaymentStatus] = useState<string>("");
   const [user, setUser] = useState<User | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 
