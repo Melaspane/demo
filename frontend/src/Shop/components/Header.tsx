@@ -10,7 +10,7 @@ interface Props {
 
 const headerStyle: CSSProperties = {
   padding: 8,
-  backgroundColor: "674ea7#",
+  backgroundColor: "0a3d62#",
   color: "white",
   width: "100%",
   display: "flex",
