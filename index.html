@@ -3,14 +3,15 @@
 <head>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        window.onload = function() {
+        try {
             Pi.init({ version: "2.0", sandbox: true });
-            console.log("Pi SDK Initialized");
-        };
+            alert("إذا رأيت هذه الرسالة ولم يظهر الكود، فأنت بحاجة لضغط Submit في لوحة المطورين");
+        } catch (err) {
+            console.error(err);
+        }
     </script>
 </head>
-<body style="text-align: center; direction: rtl;">
-    <h1>جاري تفعيل الاتصال...</h1>
-    <p>إذا لم يظهر الرقم، تأكد أنك تفتح الرابط من داخل Pi Browser.</p>
+<body style="text-align: center; padding-top: 50px;">
+    <h1>جاري محاولة استخراج الكود...</h1>
 </body>
 </html>
