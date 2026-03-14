@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Samapi Connection</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        // تشغيل نظام الربط فور فتح الصفحة
-        Pi.init({ version: "2.0", sandbox: true });
+        window.onload = function() {
+            Pi.init({ version: "2.0", sandbox: true });
+            console.log("Pi SDK Initialized");
+        };
     </script>
 </head>
-<body style="text-align: center; padding-top: 50px; font-family: Arial;">
-    <h1>جاري استخراج كود الربط...</h1>
-    <p>افتح هذا الرابط داخل Pi Browser حصراً.</p>
+<body style="text-align: center; direction: rtl;">
+    <h1>جاري تفعيل الاتصال...</h1>
+    <p>إذا لم يظهر الرقم، تأكد أنك تفتح الرابط من داخل Pi Browser.</p>
 </body>
 </html>
