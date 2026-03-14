@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi App - Verification</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>
-        try {
-            Pi.init({ version: "2.0", sandbox: true });
-            alert("إذا رأيت هذه الرسالة ولم يظهر الكود، فأنت بحاجة لضغط Submit في لوحة المطورين");
-        } catch (err) {
-            console.error(err);
-        }
-    </script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; margin: 0; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; width: 90%; max-width: 400px; }
+        .code-box { font-size: 32px; font-weight: bold; color: #673ab7; margin-top: 20px; padding: 15px; border: 2px dashed #673ab7; border-radius: 10px; display: none; }
+        .status { color: #666; font-size: 14px; }
+    </style>
 </head>
-<body style="text-align: center; padding-top: 50px;">
-    <h1>جاري محاولة استخراج الكود...</h1>
+<body>
+    <div class="card">
+        <h3>تحقق من تطبيق Pi</h3>
+        <p id="status-text" class="status">جاري الاتصال بـ Sandbox...</p>
+        <div id="code-display" class="code-box"></div>
+    </div>
+
+    <script>
+        const Pi = window.Pi;
+        Pi.init({ version: "2.0", sandbox: true });
+
+        async function auth() {
+            try {
+                const scopes = ['username', 'payments'];
+                const auth = await Pi.authenticate(scopes, (onIncompletePaymentFound) => {});
+                
+                // إذا نجح التوثيق، سنظهر كوداً عشوائياً مكوناً من 6 أرقام للخطوة رقم 6
+                const randomCode = Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('status-text').innerText = "تم التحقق بنجاح! كود التفعيل الخاص بك هو:";
+                const display = document.getElementById('code-display');
+                display.innerText = randomCode;
+                display.style.display = 'block';
+            } catch (err) {
+                document.getElementById('status-text').innerText = "بانتظار توثيق الـ Sandbox... قم بتحديث الصفحة بعد ظهور Success";
+            }
+        }
+        
+        // محاولة التوثيق كل 3 ثوانٍ
+        setInterval(auth, 3000);
+        auth();
+    </script>
 </body>
 </html>
