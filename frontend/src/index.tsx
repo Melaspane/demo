@@ -5,7 +5,7 @@ import './defaults.css';
 import Shop from './Shop';
 
 if (window.Pi) {
-  window.Pi.init({ version: "2.0", sandbox: true });
+  window.Pi.init({ version:"2.0",sandbox:true });
 }
 
 ReactDOM.render(
